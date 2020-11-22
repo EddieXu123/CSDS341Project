@@ -1,13 +1,13 @@
 import './App.css';
 import React from 'react';
-import Nav from './components/Nav';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from './components/NavigationBar';
 
 
 function App() {
   return (
     <div>
-      <h1> lol </h1>
-      <Nav/>
+      <NavigationBar/>
     </div>
   );
 }
