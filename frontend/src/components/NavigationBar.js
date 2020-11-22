@@ -14,7 +14,7 @@ export class NavigationBar extends Component{
                     <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#link">About Us</Nav.Link>
                     </Nav>
-                    <Button variant="outline-success">Login</Button>
+                    <Button variant="outline-success">Register</Button>
                 </Navbar.Collapse>
                 </Navbar>
             </div>
