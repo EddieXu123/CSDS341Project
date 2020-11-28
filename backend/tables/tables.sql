@@ -1,3 +1,4 @@
+/*
 create table Login_Info 
 ( 
     Email_address char(30) null,
@@ -59,3 +60,4 @@ create table Takes
         foreign key ClassNum references Class
             on update cascade on delete cascade
 )
+*/
