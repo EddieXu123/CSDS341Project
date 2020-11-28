@@ -40,16 +40,13 @@ create table Interests
             on update cascade on delete cascade
 )
 
-create table Class
-(
-    ClassName char(30) null,
-    ClassNum int null
-        primary key,
-    ClassDept char(30) null
-        primary key,
-    ClassSem char(30) 
-        primary key,
-)
+create table Class (
+     ClassName char(30) null, 
+     ClassNum int , 
+     ClassDept char(30), 
+     ClassSem char(30), 
+     PRIMARY KEY (ClassNum, ClassDept, ClassSem) 
+     )
 
 create table Takes
 (
