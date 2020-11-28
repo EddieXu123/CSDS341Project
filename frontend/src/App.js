@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 import Login_Jumbo from './components/Login_Jumbo';
+import { Register } from './components/register';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <div>
       <NavigationBar/>
       <Login_Jumbo/>
-      <Login/>
+      <Register/>
       
     </div>
   );
