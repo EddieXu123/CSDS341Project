@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 03:25 AM
+-- Generation Time: Nov 28, 2020 at 04:24 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
@@ -137,6 +137,16 @@ ALTER TABLE `Takes`
 --
 ALTER TABLE `User`
   ADD PRIMARY KEY (`User_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Login_Info`
+--
+ALTER TABLE `Login_Info`
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
