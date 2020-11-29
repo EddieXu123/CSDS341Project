@@ -50,7 +50,7 @@ while( key >= 1):
     val = input()
     if(int(val) > 2):
         print("invalid value, try again")
-    else if(int(val) == 0):
+    elif(int(val) == 0):
         key = int(val)
     else:
         key = int(val)
