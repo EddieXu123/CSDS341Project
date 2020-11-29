@@ -1,16 +1,10 @@
 import React , {Component} from 'react';
 import {Navbar, Nav, Form, NavDropdown, FormControl, Button} from 'react-bootstrap';
 import '../App.css';
-import Login from './Login';
-import Login_Jumbo from './Login_Jumbo';
-import NavigationBar from './NavigationBar';
 
 export class Register extends Component{
     render(){
         return(
-            <div>
-            <NavigationBar/>
-            <Login_Jumbo/>
             <div class="login">
                 <Form>
                 <Form.Group controlId="formGroupEmail">
@@ -35,11 +29,10 @@ export class Register extends Component{
 
                 <Form.Group>
                 <Button variant="primary" type="submit" class="login_button">
-                    Register
+                    Login
                 </Button>
                 </Form.Group>
-                </Form>
-            </div>
+                </Form>oka
             </div>
         );
     }

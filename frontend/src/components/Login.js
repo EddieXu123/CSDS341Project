@@ -1,8 +1,6 @@
 import React , {Component} from 'react';
 import {Navbar, Nav, Form, NavDropdown, FormControl, Button} from 'react-bootstrap';
 import '../App.css';
-import Login_Jumbo from './Login_Jumbo';
-import NavigationBar from './NavigationBar';
 
 export class Login extends Component{
     render(){
