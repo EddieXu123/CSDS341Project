@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 04:24 AM
+-- Generation Time: Nov 28, 2020 at 03:25 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
@@ -135,6 +135,7 @@ ALTER TABLE Takes
 --
 -- Indexes for table `Student`
 --
+<<<<<<< HEAD
 ALTER TABLE Student
   ADD PRIMARY KEY (User_ID);
 
@@ -147,6 +148,10 @@ ALTER TABLE Student
 --
 ALTER TABLE Login_Info
   ALTER COLUMN User_ID int(11) NOT NULL;-- AUTO_INCREMENT; -- Changed MODIFY to ALTER COLUMN
+=======
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`User_ID`);
+>>>>>>> parent of 292c0da... lol
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
