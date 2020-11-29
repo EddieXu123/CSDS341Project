@@ -136,6 +136,7 @@ ALTER TABLE Takes
 -- Indexes for table `Student`
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 ALTER TABLE Student
   ADD PRIMARY KEY (User_ID);
 
@@ -148,6 +149,10 @@ ALTER TABLE Student
 --
 ALTER TABLE Login_Info
   ALTER COLUMN User_ID int(11) NOT NULL;-- AUTO_INCREMENT; -- Changed MODIFY to ALTER COLUMN
+=======
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`User_ID`);
+>>>>>>> parent of 292c0da... lol
 =======
 ALTER TABLE `User`
   ADD PRIMARY KEY (`User_ID`);
