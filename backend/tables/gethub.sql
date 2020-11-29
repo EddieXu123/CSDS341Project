@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 03:25 AM
+-- Generation Time: Nov 29, 2020 at 05:37 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Academics` (
   `User_ID` int(11) NOT NULL,
-  `major` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `major` char(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `AcademicYear` int(11) DEFAULT NULL,
   `GPA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -42,10 +42,10 @@ CREATE TABLE `Academics` (
 --
 
 CREATE TABLE `Class` (
-  `ClassName` char(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ClassName` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `ClassNum` int(11) NOT NULL,
-  `ClassDept` char(30) COLLATE utf8_unicode_ci NOT NULL,
-  `ClassSem` char(30) COLLATE utf8_unicode_ci NOT NULL
+  `ClassDept` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ClassSem` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -55,7 +55,7 @@ CREATE TABLE `Class` (
 --
 
 CREATE TABLE `Interests` (
-  `interests` char(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `interests` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `USER_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -66,10 +66,25 @@ CREATE TABLE `Interests` (
 --
 
 CREATE TABLE `Login_Info` (
-  `Email_address` char(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Email_address` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` char(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Security_PIN` int(11) DEFAULT NULL,
   `User_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Student`
+--
+
+CREATE TABLE `Student` (
+  `User_ID` int(11) NOT NULL,
+  `First_Name` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Last_Name` char(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DOB` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gender` char(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `PhoneNum` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -81,21 +96,6 @@ CREATE TABLE `Login_Info` (
 CREATE TABLE `Takes` (
   `User_ID` int(11) NOT NULL,
   `ClassNum` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `User`
---
-
-CREATE TABLE `User` (
-  `User_ID` int(11) NOT NULL,
-  `First_Name` char(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Last_Name` char(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DOB` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gender` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `PhoneNum` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -127,16 +127,26 @@ ALTER TABLE `Login_Info`
   ADD PRIMARY KEY (`User_ID`);
 
 --
+-- Indexes for table `Student`
+--
+ALTER TABLE `Student`
+  ADD PRIMARY KEY (`User_ID`);
+
+--
 -- Indexes for table `Takes`
 --
 ALTER TABLE `Takes`
   ADD PRIMARY KEY (`User_ID`,`ClassNum`);
 
 --
--- Indexes for table `User`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `User`
-  ADD PRIMARY KEY (`User_ID`);
+
+--
+-- AUTO_INCREMENT for table `Login_Info`
+--
+ALTER TABLE `Login_Info`
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
