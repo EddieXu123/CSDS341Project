@@ -114,6 +114,7 @@ def get_main_info(User_ID):
     gender =  myresult[0][2]
     phoneNum =  myresult[0][3]
 
+    
     em = (User_ID,)
     mycursor.execute("SELECT interests FROM Interests WHERE User_ID = %s", em)
     myresult = mycursor.fetchall()
@@ -129,6 +130,9 @@ def get_main_info(User_ID):
     #print everything out
     print("--------------------------------------")
     print("name:" + fname + " " + lname)
+
+def get_interests():
+    return input('Please enter in your hobbies: ')
 
 def get_user_id(email):
     em = (email, )
@@ -148,7 +152,7 @@ def register():
     sql = "INSERT INTO Login_Info (Email_address, Password) VALUES (%s, %s)"
     val = (str(email), str(password))
     mycursor.execute(sql, val)
-    
+
     mydb.commit()
     user_id = get_user_id(email)
     mycursor.execute("INSERT INTO Student (User_ID, First_Name, Last_Name, DOB, gender, PhoneNum) VALUES(%s, %s, %s, %s, %s, %s)", (user_id, str(first), str(last), str(dob), str(gender), str(phone_num)))
@@ -193,6 +197,10 @@ def enter_info(user_id):
               VALUES (%s, %s, %s, %s)"""
         user_info = (user_id, major, year, gpa)
         mycursor.execute(add_academic_info, user_info)
+
+        interest = get_interests()
+        add_interests = """INSERT INTO Interests (interests, User_ID) VALUES (%s, %s)"""
+        mycursor.execute(add_interests, (user_id, interest))
         mydb.commit()
         mydb.close()
         print("success")
