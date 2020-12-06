@@ -142,11 +142,17 @@ def register():
     first = get_first_name()
     last = get_last_name()
     password = get_password()
+    dob = get_DOB()
+    gender = get_gender()
+    phone_num = get_phone_num()
     sql = "INSERT INTO Login_Info (Email_address, Password) VALUES (%s, %s)"
     val = (str(email), str(password))
     mycursor.execute(sql, val)
+    
     mydb.commit()
     user_id = get_user_id(email)
+    mycursor.execute("INSERT INTO Student (User_ID, First_Name, Last_Name, DOB, gender, PhoneNum) VALUES(%s, %s, %s, %s, %s, %s)", (user_id, str(first), str(last), str(dob), str(gender), str(phone_num)))
+    mydb.commit()
     print("Success")
     
 def get_login_info():
