@@ -134,7 +134,7 @@ def get_user_id(email):
     em = (email, )
     mycursor.execute("SELECT User_ID FROM Login_Info WHERE Email_address = %s", em)
     myresult = mycursor.fetchall()
-    return myresult[0][0]
+    return myresult[0][0] 
 
 # Only add if the username (email address) doesn't exist
 def register():
