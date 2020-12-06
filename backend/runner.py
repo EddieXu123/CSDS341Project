@@ -8,8 +8,8 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="orhanisbae",
-  database = "test"
+  password="mysql",
+  database = "gethub"
 )
 
 
@@ -86,29 +86,24 @@ def get_class_sem():
     return input('Please enter the semester you are taking this class [Fall, Winter, Spring, Summer]: ')
 
 def matching(u_id):
-    print("lol")
     em = (u_id,)
     mycursor.execute("SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = %s", em)
     myresult = mycursor.fetchall()
-    print(myresult)
     clnum = myresult[0][0]
     cldept = myresult[0][1]
     clsem = myresult[0][2]
     em = (clnum, cldept, clsem)
     mycursor.execute("SELECT User_ID FROM Takes WHERE Classnum = %s and ClassDept = %s and ClassSem = %s", em)
     myresult = mycursor.fetchall()
-    print("pape")
+    get_matched()
     for x in myresult:
         id = x[0]
-        print("id:" + str(id))
         get_main_info(id)
 
 def get_main_info(User_ID):
-    print(User_ID)
     em = (User_ID,)
     mycursor.execute("SELECT First_Name, Last_Name, gender, PhoneNum FROM Student WHERE User_ID = %s", em)
     myresult = mycursor.fetchall()
-    print(myresult)
     fname = myresult[0][0]
     lname = myresult[0][1]
     gender =  myresult[0][2]
@@ -126,10 +121,15 @@ def get_main_info(User_ID):
     major = myresult[0][0]
     yr = myresult[0][1]
     gpa = myresult[0][2]
-
     #print everything out
     print("--------------------------------------")
     print("name:" + fname + " " + lname)
+    print("gender = " + gender)
+    print("phone num:" + str(phoneNum))
+    print("interests:" + interests)
+    print("major:" + major + " year:" + str(yr))
+    print("GPA:" + str(gpa))
+    print("--------------------------------------")
 
 def get_interests():
     return input('Please enter in your hobbies: ')
@@ -200,7 +200,7 @@ def enter_info(user_id):
 
         interest = get_interests()
         add_interests = """INSERT INTO Interests (interests, User_ID) VALUES (%s, %s)"""
-        mycursor.execute(add_interests, (user_id, interest))
+        mycursor.execute(add_interests, (interest, user_id))
         mydb.commit()
         mydb.close()
         print("success")
@@ -222,7 +222,6 @@ def get_sem_num_dept(user_id):
     #mycursor.execute(query, info)
     mycursor.execute("SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = {u_id[0]}")
     myresult = mycursor.fetchall()
-    print("THERE")
     print(myresult[0][1])
     return myresult[0][0], myresult[0][1], myresult[0][2]
 
@@ -242,7 +241,6 @@ def log_in():
     print(user_id[0][0])
     u_id = user_id[0][0]
     enter_info(u_id)
-    print("WORK TO HERE")
     matching(u_id)
 
 
@@ -269,7 +267,6 @@ def run():
             key = int(val)
             if(key == 1):
                 log_in()
-                get_matched()
 
                 print("Thanks for checking out GetHub! Come back soon!")
                 key = 0
