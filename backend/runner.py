@@ -100,7 +100,6 @@ def register():
     
 
 
-
 def get_login_info():
     email = input("Please enter in the email you registered with: ")
     cursor = mydb.cursor()
@@ -153,21 +152,34 @@ def log_in():
     u_id = user_id[0][0]
     enter_info(u_id)
 
-#application starts here
-key = 1
-print("Welcome to Gethub, the real antisocial social club")
-while( key >= 1):
-    print("press 1 to login")
-    print("press 2 to register")
-    print("press 0 to quit")
-    val = input()
-    if(int(val) > 2 or int(val) < 0):
-        print("invalid value, try again")
-    elif(int(val) == 0):
-        key = int(val)
-    else:
-        key = int(val)
-        if(key == 1):
-            log_in()
+def get_matched():
+    print("Welcome back! Here are the users who you can match with: ")
+
+
+
+def run():
+    #application starts here
+    key = 1
+    print("Welcome to Gethub, the real antisocial social club")
+    while(key >= 1):
+        print("press 1 to login")
+        print("press 2 to register")
+        print("press 0 to quit")
+        val = input()
+        if val != "1" and val != "2" and val != "0":
+            print("Enter a valid input please!")
+            continue
+        elif(int(val) == 0):
+            key = int(val)
         else:
-            register()
+            key = int(val)
+            if(key == 1):
+                log_in()
+                get_matched()
+
+                print("Thanks for checking out GetHub! Come back soon!")
+                key = 0
+            else:
+                register()
+
+run()
