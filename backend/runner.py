@@ -76,13 +76,53 @@ def get_year():
 def get_password():
     return input ('Please enter in a password: ') #Don't need to check because doesn't need to match when registering
 
+def get_class_num():
+    return input('Please enter your class Number: ')
 
+def get_class_dept():
+    return input('Please enter the department of your class: ')
+
+def get_class_sem():
+    return input('Please enter the semester you are taking this class [Fall, Winter, Spring, Summer]: ')
+
+def matching(classNum, classDept, classSem):
+    em = (classNum, classDept, classSem)
+    mycursor.execute("SELECT User_ID FROM Takes WHERE ClassNum = %s and ClassDept = %s and ClassSem = %s", em)
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        id = x[0]
+        get_main_info(id)
+
+def get_main_info(User_ID):
+    em = (User_ID,)
+    mycursor.execute("SELECT First_Name, Last_Name, gender, PhoneNum FROM Students WHERE User_ID = %s", em)
+    myresult = mycursor.fetchall()
+    fname = myresult[0][0]
+    lname = myresult[0][1]
+    gender =  myresult[0][2]
+    phoneNum =  myresult[0][3]
+
+    em = (User_ID,)
+    mycursor.execute("SELECT interests FROM Interests WHERE User_ID = %s", em)
+    myresult = mycursor.fetchall()
+    interests = myresult[0][0]
+
+    em = (User_ID,)
+    mycursor.execute("SELECT major, AcademicYear, GPA FROM Academics WHERE User_ID = %s", em)
+    myresult = mycursor.fetchall()
+    major = myresult[0][0]
+    yr = myresult[0][1]
+    gpa = myresult[0][2]
+
+    #print everything out
+    print("--------------------------------------")
+    print("name:" + fname + " " + lname)
 
 def get_user_id(email):
-    cursor = mydb.cursor()
     em = (email, )
-    cursor.execute("SELECT User_ID FROM Login_Info WHERE Email_address = %s", em)
-    myresult = cursor.fetchall()
+    mycursor.execute("SELECT User_ID FROM Login_Info WHERE Email_address = %s", em)
+    myresult = mycursor.fetchall()
     return myresult[0][0]
 
 # Only add if the username (email address) doesn't exist
@@ -98,8 +138,6 @@ def register():
     user_id = get_user_id(email)
     print("Success")
     
-
-
 def get_login_info():
     email = input("Please enter in the email you registered with: ")
     cursor = mydb.cursor()
@@ -123,17 +161,45 @@ def get_login_info():
 
 def enter_info(user_id):
     if (not has_info(user_id)):
+        class_sem = str(get_class_sem())
+        class_num = str(get_class_num())
+        class_dept = str(get_class_dept())
+        add_class_info = """INSERT INTO Takes (User_id, ClassNum, ClassDept, ClassSem) VALUES (%s, %s, %s, %s)"""
+        user_class_info = (user_id, class_num, class_dept, class_sem)
+        mycursor.execute(add_class_info, user_class_info)
+
         major = str(get_major())
         year = int(get_year())
         gpa = get_gpa()
-        add_info = """INSERT INTO Academics 
+        add_academic_info = """INSERT INTO Academics 
               (User_ID, major, AcademicYear, GPA) 
               VALUES (%s, %s, %s, %s)"""
         user_info = (user_id, major, year, gpa)
-        mycursor.execute(add_info, user_info)
+        mycursor.execute(add_academic_info, user_info)
         mydb.commit()
         mydb.close()
         print("success")
+
+
+# WRite a query to get the sem, num, dept of a user_id
+def get_sem_num_dept(user_id):
+    print("Hello")
+    u_id = (user_id, )
+    print("Works")
+    print("TestAgain")
+    print(u_id)
+    print(type(u_id))
+    print(u_id[0])
+    print(type(u_id[0]))
+    print("SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = {u_id[0]}")
+    #query = "SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = %s"
+    #info = str(u_id[0])
+    #mycursor.execute(query, info)
+    mycursor.execute("SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = {u_id[0]}")
+    myresult = mycursor.fetchall()
+    print("THERE")
+    print(myresult[0][1])
+    return myresult[0][0], myresult[0][1], myresult[0][2]
 
 def has_info(user_id):
     cursor = mydb.cursor()
@@ -151,6 +217,10 @@ def log_in():
     print(user_id[0][0])
     u_id = user_id[0][0]
     enter_info(u_id)
+    print("WORK TO HERE")
+    sem, num, dept = get_sem_num_dept(u_id)
+    #matching(num, dept, sem)
+
 
 def get_matched():
     print("Welcome back! Here are the users who you can match with: ")

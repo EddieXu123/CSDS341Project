@@ -1,4 +1,19 @@
+import mysql.connector
+#edit this according to your local configuration
+#python -m pip install mysql-connector-python 
+#^ make sure this package is installed using terminal so that you can run everything else
 
+#create connection to database
+#modify this according to your setup
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="orhanisbae",
+  database = "test"
+)
+
+
+mycursor = mydb.cursor()
 
 
 def matching(classNum, classDept, classSem):
@@ -9,9 +24,9 @@ def matching(classNum, classDept, classSem):
 
     for x in myresult:
         id = x[0]
-        get_info(id)
+        get_main_info(id)
 
-def get_info(User_ID):
+def get_main_info(User_ID):
     cursor = mydb.cursor()
     em = (User_ID,)
     cursor.execute("SELECT First_Name, Last_Name, gender, PhoneNum FROM Students WHERE User_ID = %s", em)
