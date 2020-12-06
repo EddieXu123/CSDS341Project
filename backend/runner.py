@@ -85,19 +85,30 @@ def get_class_dept():
 def get_class_sem():
     return input('Please enter the semester you are taking this class [Fall, Winter, Spring, Summer]: ')
 
-def matching(classNum, classDept, classSem):
-    em = (classNum, classDept, classSem)
-    mycursor.execute("SELECT User_ID FROM Takes WHERE ClassNum = %s and ClassDept = %s and ClassSem = %s", em)
+def matching(u_id):
+    print("lol")
+    em = (u_id,)
+    mycursor.execute("SELECT ClassNum, ClassDept, ClassSem FROM Takes WHERE User_ID = %s", em)
     myresult = mycursor.fetchall()
-
+    print(myresult)
+    clnum = myresult[0][0]
+    cldept = myresult[0][1]
+    clsem = myresult[0][2]
+    em = (clnum, cldept, clsem)
+    mycursor.execute("SELECT User_ID FROM Takes WHERE Classnum = %s and ClassDept = %s and ClassSem = %s", em)
+    myresult = mycursor.fetchall()
+    print("pape")
     for x in myresult:
         id = x[0]
+        print("id:" + str(id))
         get_main_info(id)
 
 def get_main_info(User_ID):
+    print(User_ID)
     em = (User_ID,)
-    mycursor.execute("SELECT First_Name, Last_Name, gender, PhoneNum FROM Students WHERE User_ID = %s", em)
+    mycursor.execute("SELECT First_Name, Last_Name, gender, PhoneNum FROM Student WHERE User_ID = %s", em)
     myresult = mycursor.fetchall()
+    print(myresult)
     fname = myresult[0][0]
     lname = myresult[0][1]
     gender =  myresult[0][2]
@@ -218,8 +229,7 @@ def log_in():
     u_id = user_id[0][0]
     enter_info(u_id)
     print("WORK TO HERE")
-    sem, num, dept = get_sem_num_dept(u_id)
-    #matching(num, dept, sem)
+    matching(u_id)
 
 
 def get_matched():

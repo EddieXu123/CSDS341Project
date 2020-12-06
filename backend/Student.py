@@ -8,12 +8,10 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="orhanisbae",
-  database = "test"
+  password="mysql",
+  database = "gethub"
 )
 
-
-mycursor = mydb.cursor()
 
 
 def matching(classNum, classDept, classSem):
