@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2020 at 02:41 AM
+-- Generation Time: Dec 07, 2020 at 04:18 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -39,8 +39,8 @@ CREATE TABLE `Academics` (
 --
 
 INSERT INTO `Academics` (`User_ID`, `major`, `AcademicYear`, `GPA`) VALUES
-(19, 'Computer Science', 2022, '4'),
-(20, 'Computer Science', 2022, '3');
+(77, 'Computer Science', 2022, '4'),
+(78, 'Computer Science', 2022, '3');
 
 -- --------------------------------------------------------
 
@@ -66,6 +66,14 @@ CREATE TABLE `Interests` (
   `USER_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `Interests`
+--
+
+INSERT INTO `Interests` (`interests`, `USER_ID`) VALUES
+('Skiing, coding, driving', 77),
+('driving, skiing, coding', 78);
+
 -- --------------------------------------------------------
 
 --
@@ -84,8 +92,8 @@ CREATE TABLE `Login_Info` (
 --
 
 INSERT INTO `Login_Info` (`Email_address`, `Password`, `Security_PIN`, `User_ID`) VALUES
-('erx@case.edu', 'Password123', NULL, 19),
-('Prithi@gmail.com', 'Password123', NULL, 20);
+('eddie@gmail.com', 'Password', NULL, 77),
+('newUser@gmail.com', 'Pass', NULL, 78);
 
 -- --------------------------------------------------------
 
@@ -99,8 +107,16 @@ CREATE TABLE `Student` (
   `Last_Name` char(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DOB` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `PhoneNum` int(11) DEFAULT NULL
+  `PhoneNum` char(15) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Student`
+--
+
+INSERT INTO `Student` (`User_ID`, `First_Name`, `Last_Name`, `DOB`, `gender`, `PhoneNum`) VALUES
+(77, 'Eddie', 'Xu', '08/02/2000', 'Male', '609-391-1823'),
+(78, 'Guy', 'Fieri', '08/20/1999', 'Female', '504-315-3620');
 
 -- --------------------------------------------------------
 
@@ -114,6 +130,14 @@ CREATE TABLE `Takes` (
   `ClassDept` char(20) COLLATE utf8_unicode_ci NOT NULL,
   `ClassSem` char(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Takes`
+--
+
+INSERT INTO `Takes` (`User_ID`, `ClassNum`, `ClassDept`, `ClassSem`) VALUES
+(77, 2, 'Computer Science', 'Spring'),
+(78, 2, 'Computer Science', 'Spring');
 
 --
 -- Indexes for dumped tables
@@ -163,7 +187,7 @@ ALTER TABLE `Takes`
 -- AUTO_INCREMENT for table `Login_Info`
 --
 ALTER TABLE `Login_Info`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
